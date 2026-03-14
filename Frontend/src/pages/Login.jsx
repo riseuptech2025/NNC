@@ -92,11 +92,11 @@ const Login = () => {
               </button>
             </div>
 
-            <div className="text-sm text-center text-gray-600 dark:text-gray-400">
+            {/* <div className="text-sm text-center text-gray-600 dark:text-gray-400">
               <p>Demo credentials:</p>
               <p>Email: admin@nnc.com</p>
               <p>Password: admin123</p>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
