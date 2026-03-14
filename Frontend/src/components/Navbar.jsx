@@ -53,17 +53,17 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Mobile Search Bar - Visible only on mobile */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-md mx-4 md:hidden">
+          {/* Mobile Search Bar - Only visible on mobile */}
+          <form onSubmit={handleSearch} className="flex-1 max-w-xs mx-2 md:hidden">
             <div className="relative w-full">
               <input
                 type="text"
-                placeholder="Search news..."
+                placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 pl-10 pr-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
+                className="w-full px-3 py-1.5 pl-8 pr-3 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
               />
-              <FaSearch className="absolute left-3 top-3 text-gray-400" />
+              <FaSearch className="absolute left-2.5 top-2 text-gray-400 text-sm" />
             </div>
           </form>
 
@@ -81,7 +81,7 @@ const Navbar = () => {
             </div>
           </form>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -170,16 +170,11 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+          {/* Empty div for mobile layout balance - no menu button */}
+          <div className="md:hidden w-8"></div>
         </div>
 
-        {/* Categories */}
+        {/* Categories - Hidden on mobile */}
         <div className="hidden md:flex space-x-6 py-2 border-t dark:border-gray-700">
           {categories.map((category) => (
             <Link
@@ -191,103 +186,6 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t dark:border-gray-700">
-            {/* Mobile Categories */}
-            <div className="space-y-2">
-              {categories.map((category) => (
-                <Link
-                  key={category}
-                  to={`/category/${category.toLowerCase()}`}
-                  className="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary-600"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {category}
-                </Link>
-              ))}
-            </div>
-
-            {/* Mobile Auth */}
-            <div className="mt-4 pt-4 border-t dark:border-gray-700">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="flex items-center space-x-2 w-full py-2"
-              >
-                {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon />}
-                <span>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
-              </button>
-              
-              {isAuthenticated ? (
-                <>
-                  <Link
-                    to="/admin"
-                    className="block py-2 text-primary-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    to="/admin/news/new"
-                    className="block py-2 text-primary-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Add News
-                  </Link>
-                  <Link
-                    to="/admin/ads/new"
-                    className="block py-2 text-blue-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <FaAd />
-                      <span>Add Ad</span>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/admin/sponsored/new"
-                    className="block py-2 text-green-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <FaDollarSign />
-                      <span>Add Sponsored</span>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/admin/seo"
-                    className="block py-2 text-gray-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <FaCog />
-                      <span>SEO Settings</span>
-                    </div>
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logout()
-                      setIsOpen(false)
-                    }}
-                    className="flex items-center space-x-2 w-full py-2 text-red-600"
-                  >
-                    <FaSignOutAlt />
-                    <span>Logout</span>
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  className="block py-2 text-primary-600"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   )

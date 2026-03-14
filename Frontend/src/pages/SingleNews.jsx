@@ -24,6 +24,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import Comments from '../components/Comments'
 import RelatedNews from '../components/RelatedNews'
+import TrendingSidebar from '../components/TrendingSidebar'
 import AdManager from '../components/ads/AdManager'
 
 const reactionIcons = {
@@ -179,7 +180,9 @@ const SingleNews = () => {
         animate="animate"
         variants={staggerContainer}
       >
-        {/* Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <main className="lg:col-span-8 space-y-8">
+            {/* Header */}
         <motion.header 
           className="mb-8"
           variants={fadeInUp}
@@ -410,13 +413,16 @@ const SingleNews = () => {
         >
           <Comments newsId={id} />
         </motion.div>
+      </main>
 
-        {/* Related News */}
-        <motion.div variants={fadeInUp}>
-          <RelatedNews category={news.category} currentNewsId={id} />
-        </motion.div>
-      </motion.article>
-    </>
+      {/* Sidebar */}
+      <aside className="lg:col-span-4 space-y-8">
+        <TrendingSidebar />
+        <RelatedNews category={news.category} currentNewsId={id} />
+      </aside>
+    </div>
+  </motion.article>
+</>
   )
 }
 
