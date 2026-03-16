@@ -9,7 +9,7 @@ const SEOSettings = () => {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     siteTitle: 'NNC - Nepali News Center',
-    siteDescription: 'Latest news from Nepal including politics, technology, sports, business, entertainment and health.',
+    siteDescription: 'Latest news from Nepal including politics, International, Shares, technology, sports, business, entertainment and health.',
     siteKeywords: 'Nepali news, Nepal news, politics Nepal, technology Nepal, sports Nepal',
     authorName: 'NNC Team',
     twitterHandle: '@nncnews',

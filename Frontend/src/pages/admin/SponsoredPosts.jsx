@@ -186,6 +186,8 @@ const SponsoredPosts = () => {
                     <option value="Technology">Technology</option>
                     <option value="Business">Business</option>
                     <option value="Politics">Politics</option>
+                    <option value="International">International</option>
+                    <option value="Shares">Shares</option>
                   </select>
                 </div>
 

@@ -17,6 +17,8 @@ import useStore from '../store/useStore'
 
 const categories = [
   'Politics',
+  'International',
+  'Shares',
   'Technology',
   'Sports',
   'Business',

@@ -1,5 +1,7 @@
 export const CATEGORIES = [
   'Politics',
+  'International',
+  'Shares',
   'Technology',
   'Sports',
   'Business',

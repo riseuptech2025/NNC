@@ -39,7 +39,7 @@ const Home = () => {
     <>
       <Helmet>
         <title>NNC - Nepali News Center | Latest News from Nepal</title>
-        <meta name="description" content="Get the latest news from Nepal including politics, technology, sports, business, entertainment and health." />
+        <meta name="description" content="Get the latest news from Nepal including politics, International, Shares, technology, sports, business, entertainment and health." />
       </Helmet>
 
       <BreakingTicker />
