@@ -4,7 +4,7 @@ const createSitemap = async (news) => {
   const baseUrl = process.env.BASE_URL || 'https://nnc-news-platform.vercel.app';
   
   const categories = [
-    'Politics', 'Technology', 'Sports', 'Business', 'Entertainment', 'Health'
+    'Politics', 'International','Shares', 'Technology', 'Sports', 'Business', 'Entertainment', 'Health'
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -2,12 +2,30 @@ const News = require('../models/News');
 const Comment = require('../models/Comment');
 const cloudinary = require('../utils/cloudinary');
 
+const normalizeCategory = (category) => {
+  if (!category || typeof category !== 'string') return category;
+  return category
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+const sendError = (res, error) => {
+  console.error(error);
+  if (error.name === 'ValidationError') {
+    return res.status(400).json({ message: error.message });
+  }
+  return res.status(500).json({ message: 'Server error' });
+};
+
 const getNews = async (req, res) => {
   try {
     const { category, page = 1, limit = 10, trending } = req.query;
     const query = {};
     
-    if (category) query.category = category;
+    if (category) query.category = normalizeCategory(category);
     if (trending === 'true') query.isTrending = true;
 
     const news = await News.find(query)
@@ -62,7 +80,7 @@ const createNews = async (req, res) => {
       title,
       description,
       content,
-      category,
+      category: normalizeCategory(category),
       tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
       image: imageUrl,
       imagePublicId,
@@ -74,8 +92,7 @@ const createNews = async (req, res) => {
     await news.save();
     res.status(201).json(news);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    return sendError(res, error);
   }
 };
 
@@ -105,7 +122,7 @@ const updateNews = async (req, res) => {
     news.title = title || news.title;
     news.description = description || news.description;
     news.content = content || news.content;
-    news.category = category || news.category;
+    news.category = category ? normalizeCategory(category) : news.category;
     news.tags = tags ? tags.split(',').map(tag => tag.trim()) : news.tags;
     news.isBreaking = isBreaking !== undefined ? isBreaking === 'true' : news.isBreaking;
     news.isTrending = isTrending !== undefined ? isTrending === 'true' : news.isTrending;
@@ -113,8 +130,7 @@ const updateNews = async (req, res) => {
     await news.save();
     res.json(news);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    return sendError(res, error);
   }
 };
 

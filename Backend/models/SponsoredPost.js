@@ -26,7 +26,7 @@ const sponsoredPostSchema = new mongoose.Schema({
   sponsorWebsite: String,
   category: {
     type: String,
-    enum: ['Politics', 'Technology', 'Sports', 'Business', 'Entertainment', 'Health', 'Sponsored'],
+    enum: ['Politics', 'International','Shares', 'Technology', 'Sports', 'Business', 'Entertainment', 'Health', 'Sponsored'],
     default: 'Sponsored'
   },
   tags: [String],
